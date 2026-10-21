@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Carbon dioxide emissions</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Carbon dioxide emissions</h1>
+      <p>
+        Choose a country and a measure to see how its fossil carbon dioxide
+        emissions have changed. The data come from
+        <a href="https://github.com/owid/co2-data">Our World in Data</a>, the
+        same file we used in the climate module.
+      </p>
+
+      <form id="controls">
+        <label>
+          Country
+          <select id="country"></select>
+        </label>
+        <label>
+          Measure
+          <select id="measure">
+            <option value="co2">Annual emissions</option>
+            <option value="co2_per_capita">Emissions per person</option>
+            <option value="share_global_co2">Share of global emissions</option>
+            <option value="cumulative_co2">Cumulative emissions</option>
+          </select>
+        </label>
+        <label>
+          First year <output id="start-label"></output>
+          <input id="start" type="range" min="1850" max="2020" step="10" value="1950" />
+        </label>
+      </form>
+
+      <figure>
+        <div id="chart"><p id="status">Loading data…</p></div>
+        <figcaption id="caption"></figcaption>
+      </figure>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+:root {
+  --text: #1f2328;
+  --muted: #59636e;
+  --background: #ffffff;
+  --accent: #0969da;
+  font-family: system-ui, sans-serif;
+  color: var(--text);
+  background: var(--background);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #e6edf3;
+    --muted: #9198a1;
+    --background: #0d1117;
+    --accent: #4493f8;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+}
+
+main {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+a {
+  color: var(--accent);
+}
+
+/* Controls sit side by side on wide screens and stack on a phone. */
+#controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+#controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1 1 12rem;
+}
+
+select,
+input {
+  font: inherit;
+  min-height: 2.5rem;
+}
+
+figure {
+  margin: 1.5rem 0 0;
+}
+
+#chart svg {
+  max-width: 100%;
+  height: auto;
+}
+
+figcaption,
+#status {
+  color: var(--muted);
+}

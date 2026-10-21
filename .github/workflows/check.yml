@@ -1,0 +1,19 @@
+name: App check
+
+# Opens the app in a headless browser and runs the tests in tests/. They check that the
+# chart draws, that the controls redraw it, that the page fits a phone screen, and that
+# the browser console shows no errors.
+on: push
+
+jobs:
+  test:
+    name: test the app in a browser
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: playwright install --with-deps --only-shell chromium
+      - run: pytest tests

@@ -1,0 +1,60 @@
+name: Publish site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let an in-flight deploy finish; queue the next one instead of cancelling.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # Skip, rather than fail, when there is nothing to publish or Pages is not enabled.
+  check:
+    name: check for a site to publish
+    runs-on: ubuntu-latest
+    outputs:
+      publish: ${{ steps.site.outputs.publish }}
+    steps:
+      - uses: actions/checkout@v7
+      - id: site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ ! -f web/index.html ]; then
+            echo "::notice::No web/index.html, so there is no site to publish."
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          elif ! gh api "repos/${{ github.repository }}/pages" --silent 2>/dev/null; then
+            echo "::notice::GitHub Pages is not enabled for this repository. Ask your instructor to enable it."
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  deploy:
+    name: deploy web/ to GitHub Pages
+    needs: check
+    if: needs.check.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+
+      # Everything in web/ is served as-is: HTML pages, exported maps, images,
+      # GeoJSON. No build step, and no Jekyll, so filenames starting with an
+      # underscore survive.
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: web
+
+      - id: deployment
+        uses: actions/deploy-pages@v5
