@@ -24,6 +24,8 @@ def url():
     server.shutdown()
 
 
+# Opens the app, waits for the first chart, and fails the test if the browser console shows
+# any error.
 @pytest.fixture
 def app(page, url):
     errors = []
@@ -48,3 +50,16 @@ def test_fits_a_phone_screen(app):
     app.set_viewport_size({"width": 390, "height": 844})
     overflow = app.evaluate("document.documentElement.scrollWidth > window.innerWidth")
     assert not overflow
+
+
+def test_says_when_a_choice_has_no_data(app):
+    # Monaco has no emissions data in the Our World in Data file.
+    app.select_option("#country", "Monaco")
+    expect(app.locator("#status")).to_contain_text("no data")
+    expect(app.locator("#chart svg")).to_have_count(0)
+
+
+def test_says_when_the_data_cannot_load(page, url):
+    page.route("https://raw.githubusercontent.com/**", lambda route: route.abort())
+    page.goto(url)
+    expect(page.get_by_role("alert")).to_contain_text("could not be loaded", timeout=60_000)

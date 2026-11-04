@@ -25,14 +25,14 @@ you make, how you check them, and how well a reader can use the result.
     design document explains why a copy was needed.
   - At least one view of the app has been checked against the notebook from the earlier module,
     and `design.md` says how.
-  - The app handles the cases a reader will hit: missing values, a choice with no data, and slow
-    loading.
+  - The app handles the cases a reader will hit: missing values, a choice with no data, slow
+    loading, and data that fail to load. The starter app shows one way to do this.
 
 ## 3. Software practices (**5 points**)
 
 **5 points**: The repository is something another person could maintain.
 
-  - Every dependency is pinned to an exact version and listed in `design.md` with its purpose.
+  - Every dependency is listed in `design.md` with its purpose.
   - Tests in `tests/` check what the app does, beyond the starter tests, and pass on GitHub
     Actions. The badge in the README is green.
   - The repository has a `LICENSE` file, and `design.md` explains the choice of license and
@@ -43,17 +43,14 @@ you make, how you check them, and how well a reader can use the result.
 
 **3 points**: A reader can use the app.
 
-  - A web app is published on GitHub Pages and linked from the README. An installable, desktop
-    or command-line app has install instructions that work for someone outside the team.
+  - A web app is published on GitHub Pages and linked from the README. An installable or
+    command-line app has install instructions that work for someone outside the team.
   - The app works on a phone screen and with a keyboard.
 
 ## 5. Process and GitHub (**3 points**)
 
 **3 points**:
 
-  - The repository includes your conversations with your coding agent, exported to `prompts/`.
-    These show the guidance you gave the agent, including corrections and times you redirected
-    it.
   - The README names the authors, describes the app, and ends with a short statement on AI use.
   - Commits show how the work developed, with clear messages.
 

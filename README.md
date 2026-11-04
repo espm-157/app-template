@@ -14,7 +14,7 @@
 
 🎛️ Reactive design: controls, state, and what happens when a reader changes something  
 🖥️ Where code runs: in the reader's browser or on a server, and what each one costs  
-📦 Dependencies, and why every version is pinned  
+📦 Dependencies: what each library does and where it comes from  
 ✅ Continuous integration that tests an app in a real browser  
 🚀 Shipping: continuous deployment to GitHub Pages  
 ⚖️ Open source licenses for code and for data  
@@ -63,6 +63,26 @@ well as Python. Your job is to decide what the app should do, check that it does
 explain your choices. The browser's developer tools (the console and the network tab) are
 where you see errors and what data the app loads.
 
+### Kinds of apps
+
+An app does not have to be a dashboard. A few kinds that fit this module:
+
+- **Data explorer.** Pick a country, a measure or a year range and see the chart change, like
+  the starter app.
+- **Map explorer.** Pick a place or a layer and see what the data say there, building on the
+  spatial module.
+- **What-if calculator.** The controls set the inputs to a calculation rather than a filter:
+  if emissions follow this path, when is the remaining carbon budget used up?
+- **Model explorer.** Sliders set the parameters of a population, fisheries or disease model,
+  and the app draws what the model predicts.
+- **Look up your own place.** Enter a city or a zip code and see how it compares with
+  everywhere else.
+- **Guess, then reveal.** The reader draws or guesses a trend before the app shows the real
+  data.
+
+A game-like app can work too, such as managing a fishery over twenty years, as long as it runs
+on real data or a model that you check against your Python version from the earlier module.
+
 ### Examples
 
 - [Mosaic](https://idl.uw.edu/mosaic/) examples: linked, filterable views over DuckDB-WASM.
@@ -80,9 +100,7 @@ Most teams will build path 1. The others cover the same objectives in a differen
 1. **Web app.** A responsive app published from `web/` to GitHub Pages.
 2. **Installable app.** The web app plus a manifest and a service worker, so that it can be
    installed to a phone's home screen and works offline (a progressive web app).
-3. **Desktop app.** The web app packaged for local install with [Tauri](https://tauri.app/)
-   or [Electron](https://www.electronjs.org/).
-4. **Command-line tool.** A Python package that others can install with `pip`, published
+3. **Command-line tool.** A Python package that others can install with `pip`, published
    with a version number and a changelog.
 
 ## What to hand in
@@ -91,7 +109,6 @@ Most teams will build path 1. The others cover the same objectives in a differen
 - [`design.md`](design.md), filled in.
 - A `LICENSE` file. This template has none on purpose; choosing one is part of the
   assignment.
-- `prompts/`: your conversations with your coding agent, exported as files.
 - An updated README with a link to your app and a short statement on AI use.
 
 ## Setup
@@ -111,7 +128,7 @@ GitHub Actions runs two workflows on every push. The app check runs the tests in
 browser. The site workflow publishes the `web/` folder to GitHub Pages.
 
 Anything in a client-side app is public, including any key or token in its code. Never put
-one in `web/`.
+one in `web/`. A GitHub Pages site is public even when its repository is private.
 
 ## Links
 

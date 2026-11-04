@@ -1,8 +1,9 @@
 name: App check
 
 # Opens the app in a headless browser and runs the tests in tests/. They check that the
-# chart draws, that the controls redraw it, that the page fits a phone screen, and that
-# the browser console shows no errors.
+# chart draws, that the controls redraw it, that the app says so when a choice has no data
+# or the data fail to load, that the page fits a phone screen, and that the browser console
+# shows no errors.
 on: push
 
 jobs:

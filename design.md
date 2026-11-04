@@ -18,11 +18,11 @@ with it, and what in the app changes in response.
 
 ## Path
 
-Which of the four paths in the README did you choose, and why?
+Which of the three paths in the README did you choose, and why?
 
 ## Dependencies
 
-List each library the app uses, its exact version, and what it does. Say why you needed it.
+List each library the app uses, its version, and what it does. Say why you needed it.
 
 ## Tests
 
