@@ -83,15 +83,16 @@ An app does not have to be a dashboard. A few kinds that fit this module:
 A game-like app can work too, such as managing a fishery over twenty years, as long as it runs
 on real data or a model that you check against your Python version from the earlier module.
 
-### Examples
+### Readings
 
-- [Mosaic](https://idl.uw.edu/mosaic/) examples: linked, filterable views over DuckDB-WASM.
-- [Observable Framework examples](https://github.com/observablehq/framework/tree/main/examples):
-  static data apps with menus, charts and maps.
-- [MapLibre examples](https://maplibre.org/maplibre-gl-js/docs/examples/) and
-  [PMTiles](https://docs.protomaps.com/pmtiles/), maps served as single static files.
-- [Mapping Inequality](https://dsl.richmond.edu/panorama/redlining/), a polished app built
-  on the data from the spatial module.
+The course website has three pages for this module:
+
+- [HTML, CSS and JavaScript](https://espm-157.carlboettiger.info/apps-web-basics): what each
+  of the three files in `web/` does and how they fit together.
+- [Frameworks and examples](https://espm-157.carlboettiger.info/apps-examples): published apps on
+  the themes of modules 1 to 3, and the chart, map and layout libraries they are built with.
+- [Open source licenses](https://espm-157.carlboettiger.info/apps-licenses): permissive and
+  copyleft licenses, the `LICENSE` file, and the licenses of the data we use.
 
 ### Paths
 
@@ -108,7 +109,7 @@ Most teams will build path 1. The others cover the same objectives in a differen
 - Your app, with tests in `tests/` that pass on GitHub Actions.
 - [`design.md`](design.md), filled in.
 - A `LICENSE` file. This template has none on purpose; choosing one is part of the
-  assignment.
+  assignment. See [Open source licenses](https://espm-157.carlboettiger.info/apps-licenses).
 - An updated README with a link to your app and a short statement on AI use.
 
 ## Setup
