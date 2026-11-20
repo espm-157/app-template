@@ -4,17 +4,31 @@ name: App check
 # chart draws, that the controls redraw it, that the app says so when a choice has no data
 # or the data fail to load, that the page fits a phone screen, and that the browser console
 # shows no errors.
+#
+# Private class repos run on the course's own runner; anywhere else (this public template,
+# a copy outside the class) runs on GitHub's. The Playwright image already has Chromium and
+# the system libraries it needs, so nothing is installed with apt. The job runs as an
+# ordinary user, so packages go into a user directory alongside the image's
+# Playwright and its browsers.
 on: push
+
+# A new push cancels the check still running for the same branch.
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
     name: test the app in a browser
-    runs-on: ubuntu-latest
+    runs-on: ${{ (github.repository_owner == 'espm-157' && github.event.repository.private) && 'arc-runner-espm157' || 'ubuntu-latest' }}
+    container: mcr.microsoft.com/playwright/python:v1.65.2-noble
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
-        with:
-          python-version: "3.12"
-      - run: pip install -r requirements.txt
-      - run: playwright install --with-deps --only-shell chromium
+      - name: install test packages
+        run: |
+          export PYTHONUSERBASE="$RUNNER_TEMP/pyuser"
+          echo "PYTHONUSERBASE=$PYTHONUSERBASE" >> "$GITHUB_ENV"
+          echo "$PYTHONUSERBASE/bin" >> "$GITHUB_PATH"
+          python3 -m pip install --user --break-system-packages -r requirements.txt
       - run: pytest tests
